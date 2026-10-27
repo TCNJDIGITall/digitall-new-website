@@ -19,8 +19,12 @@
     scrollPending = false;
     if (reducedMotion.matches) return;
     const max = Math.max(1, root.scrollHeight - window.innerHeight);
-    const offset = Math.min(1600, window.scrollY) * 0.35;
-    root.style.setProperty('--ambient-scroll', offset.toFixed(1) + 'px');
+    const offset = Math.min(1600, window.scrollY);
+    root.style.setProperty('--ambient-grid-shift', (-offset * .0385).toFixed(1) + 'px');
+    root.style.setProperty('--ambient-one-shift', (-offset * .112).toFixed(1) + 'px');
+    root.style.setProperty('--ambient-two-shift', (offset * .0945).toFixed(1) + 'px');
+    root.style.setProperty('--ambient-three-shift', (-offset * .07).toFixed(1) + 'px');
+    root.style.setProperty('--ambient-four-shift', (offset * .042).toFixed(1) + 'px');
     root.style.setProperty('--ambient-progress', (window.scrollY / max).toFixed(3));
   }
   function onScroll() {
@@ -70,7 +74,9 @@
   function updatePreference() {
     if (reducedMotion.matches) {
       scene.classList.remove('has-pointer');
-      root.style.setProperty('--ambient-scroll', '0px');
+      ['grid','one','two','three','four'].forEach(key => {
+        root.style.setProperty('--ambient-' + key + '-shift', '0px');
+      });
     } else onScroll();
   }
   if (typeof reducedMotion.addEventListener === 'function') {
