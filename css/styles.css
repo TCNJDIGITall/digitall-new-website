@@ -81,3 +81,54 @@ body{font-size:17px;line-height:1.65}
 @media(max-width:760px){body{font-size:16px}.hero-description{font-size:18px}.intro-aside p,.section-heading>p,.feature-bottom p,.event-info p{font-size:16px}.meeting-banner p,.footer-links a{font-size:14px}.team-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.team-card{padding:0;min-height:0}.team-info{padding:16px 16px 20px;min-height:0}.team-info h3{font-size:clamp(19px,3.8vw,24px);margin-top:10px}.team-role,.team-number{font-size:11px}.team-initials{font-size:clamp(55px,12vw,86px)}.team-portrait-label{font-size:9px;bottom:12px;left:12px}.portrait-note{font-size:14px}.event-info h3{font-size:20px}.event-end{font-size:13px}}
 @media(max-width:520px){.team-grid{grid-template-columns:1fr}.team-card{display:flex;flex-direction:column;align-items:stretch;gap:0;min-height:0}.team-portrait{aspect-ratio:16/10}.team-info{padding:20px}.team-info h3{font-size:25px}.team-initials{font-size:92px}.team-portrait-label{font-size:11px}}
 @media(prefers-reduced-motion:reduce){.ticker-track,.hero-art,.art-floating,.glow{animation:none!important}.team-card,.team-portrait:before,.team-portrait:after,.team-initials,.feature-card .feature-symbol,.event-row{transition:none!important}}
+
+
+/* October 2026: real signup, clear clickable cards, accessible detail dialogs */
+.mailing-signup{max-width:920px;margin:48px auto 0;padding:32px;background:#152338;color:#f4f7ff;border:1px solid #31465f;border-radius:18px;text-align:left;position:relative;box-shadow:0 20px 44px rgba(0,0,0,.15);scroll-margin-top:110px}
+.mailing-signup-heading{margin-bottom:24px}.mailing-label{font:700 12px var(--font-heading);color:var(--green);letter-spacing:1.8px}
+.mailing-signup-heading h3{font:700 clamp(26px,3vw,38px)/1.16 var(--font-heading);letter-spacing:-1.3px;margin:9px 0 8px}
+.mailing-signup-heading h3 em{font-style:normal;color:var(--green)}
+.mailing-signup-heading p{font-size:16px;line-height:1.6;color:#d2dff0;max-width:700px;margin:0}
+.mailing-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.mailing-fields label{display:flex;flex-direction:column;gap:8px;font:700 14px/1.3 var(--font-heading);color:#f4f7ff}
+.mailing-fields label.mailing-wide{grid-column:1 / -1}
+.mailing-fields input{font:500 16px var(--font-body);width:100%;min-width:0;min-height:48px;padding:11px 14px;background:#f5f8ff;color:#142236;border:1px solid #cad5e2;border-radius:9px;outline-offset:3px}
+.mailing-fields input::placeholder{color:#59677c}
+.mailing-fields input:focus-visible{outline:3px solid var(--green);border-color:var(--green)}
+.mailing-footer{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:22px}
+.mailing-footer p{font-size:13px;line-height:1.55;color:#c3d0e0;margin:0;max-width:470px}
+.mailing-footer .mailing-submit{background:var(--green);color:#101d27;box-shadow:none;min-width:170px;border:0;cursor:pointer}
+.mailing-footer .mailing-submit:hover{background:#d5ffa9}
+.event-row{position:relative;cursor:pointer}
+.event-open,.team-card-open{position:absolute;inset:0;z-index:3;display:block;width:100%;height:100%;border:0;background:transparent;color:transparent;cursor:pointer;font-size:0;touch-action:manipulation}
+.event-open:focus-visible,.team-card-open:focus-visible{outline:3px solid var(--green);outline-offset:-5px;border-radius:11px}
+.event-row:focus-within{background:#23324c}
+.event-hint{display:block;color:var(--green);font:700 11px/1.3 var(--font-heading);letter-spacing:1px;white-space:nowrap;margin-bottom:8px}
+.team-card{position:relative;cursor:pointer}
+.team-card:focus-within{background:#273751;border-color:var(--green)}
+.team-card-open:focus-visible{border-radius:18px}
+.club-dialog{max-width:min(92vw,550px);width:550px;max-height:min(88vh,780px);padding:0;margin:auto;overflow-y:auto;color:#f4f7ff;background:#152338;border:1px solid #52647b;border-radius:20px;box-shadow:0 36px 110px #000c}
+.club-dialog::backdrop{background:rgba(2,8,18,.82);backdrop-filter:blur(8px)}
+.club-dialog[open]{animation:dialogAppear .28s ease-out both}
+.dialog-shell{position:relative;padding:37px 38px 34px}
+.dialog-close{position:absolute;top:18px;right:18px;width:42px;height:42px;border:1px solid #516580;background:#22344b;color:#fff;border-radius:50%;font-size:29px;line-height:1;display:grid;place-items:center;cursor:pointer;transition:background .2s}
+.dialog-close:hover,.dialog-close:focus-visible{background:#3a506f}
+.dialog-kicker{display:block;color:var(--green);font:700 12px/1.4 var(--font-heading);letter-spacing:1.6px;padding-right:48px}
+.dialog-role{color:var(--purple);font:700 13px/1.5 var(--font-heading);letter-spacing:1px;text-transform:uppercase;margin:20px 0 9px}
+.club-dialog h2{font:700 clamp(29px,4vw,42px)/1.13 var(--font-heading);letter-spacing:-1.7px;margin:0}
+.dialog-description{color:#e3ebf6;font-size:17px;line-height:1.7;margin:19px 0 26px}
+.profile-visual{--accent:var(--green);width:100%;height:160px;margin:24px 0 12px;display:grid;place-items:center;border-radius:15px;overflow:hidden;background:radial-gradient(circle at 65% 25%,#3e4f70,transparent 55%),#203147;color:var(--accent);font:700 82px/1 var(--font-heading);letter-spacing:-5px}
+.profile-visual img{width:100%;height:100%;object-fit:cover}
+.dialog-footer,.event-modal-links{border-top:1px solid #354a61;padding-top:21px}
+.dialog-contact,.event-flyer-link{display:inline-flex;align-items:center;gap:15px;color:var(--green);font:700 14px/1.5 var(--font-heading);border-bottom:1px solid var(--green);padding-bottom:5px;transition:color .2s,gap .2s}
+.dialog-contact:hover,.event-flyer-link:hover{gap:20px;color:#fff}
+.event-flyer-link{padding:13px 16px;color:#111d2d;border-radius:9px;background:var(--green);border-bottom:0;margin-bottom:18px}
+.event-flyer-link:hover{color:#111d2d;background:#d3ffa6}
+.event-modal-meta{margin-top:19px;font-size:16px;font-weight:700;color:#d6e2f3}
+.event-modal-links{display:flex;flex-direction:column;align-items:flex-start}
+.no-flyer-note{color:#c7d4e6;font-size:15px;line-height:1.6;margin:0 0 20px}
+.event-flyer-link[hidden],.no-flyer-note[hidden]{display:none!important}
+@keyframes dialogAppear{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:760px){.mailing-signup{padding:22px;margin-top:31px}.mailing-fields{gap:12px}.mailing-footer{flex-direction:column;align-items:stretch}.mailing-footer .mailing-submit{width:100%}.event-hint{font-size:10px;margin:6px 0 0}.dialog-shell{padding:29px 24px 26px}}
+@media(max-width:520px){.mailing-fields{grid-template-columns:1fr}.mailing-fields label.mailing-wide{grid-column:auto}.event-end{flex-wrap:wrap}.event-hint{white-space:normal}.club-dialog{max-width:calc(100vw - 26px)}.profile-visual{height:130px;font-size:68px}.club-dialog h2{font-size:30px}.dialog-description{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.club-dialog[open]{animation:none!important}.dialog-contact,.event-flyer-link{transition:none!important}}
