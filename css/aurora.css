@@ -335,3 +335,120 @@ main, .site-footer { position: relative; z-index: 1; }
 @media(prefers-reduced-motion:reduce) {
   .ticker::before {animation:none!important;opacity:.9;}
 }
+
+
+/* FULL-WIDTH GREEN HALO
+   The ticker's marquee is clipped only inside .ticker-window.
+   The outer ticker can now cast soft light into the sections ABOVE and BELOW.
+   Both halos use purely vertical gradients with NO horizontal fading. */
+.ticker {
+  position: relative;
+  overflow: visible;
+  isolation: isolate;
+  z-index: 12;
+  width: 100%;
+  background: linear-gradient(180deg,#c7ff8b 0%,#baff77 35%,#baff77 65%,#b0ff70 100%);
+  border-top: 1px solid rgba(242,255,201,.82);
+  border-bottom: 1px solid rgba(220,255,170,.82);
+  box-shadow:
+    0 -19px 54px rgba(186,255,119,.5),
+    0 21px 62px rgba(186,255,119,.47),
+    0 -4px 14px rgba(209,255,156,.55),
+    0 4px 16px rgba(209,255,156,.56),
+    inset 0 5px 18px rgba(255,255,255,.28),
+    inset 0 -4px 15px rgba(114,212,80,.18);
+}
+.ticker::before {
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:-89px;
+  height:90px;
+  pointer-events:none;
+  z-index:0;
+  animation:none;
+  background:linear-gradient(to top,
+    rgba(186,255,119,.56) 0%,
+    rgba(186,255,119,.46) 18%,
+    rgba(186,255,119,.3) 40%,
+    rgba(186,255,119,.13) 70%,
+    rgba(186,255,119,0) 100%);
+}
+.ticker::after {
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-100px;
+  height:101px;
+  pointer-events:none;
+  z-index:0;
+  background:linear-gradient(to bottom,
+    rgba(186,255,119,.57) 0%,
+    rgba(186,255,119,.46) 19%,
+    rgba(186,255,119,.29) 43%,
+    rgba(186,255,119,.12) 72%,
+    rgba(186,255,119,0) 100%);
+}
+.ticker-window {
+  position: relative;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  clip-path:inset(0);
+}
+.ticker-track {
+  flex-shrink:0;
+  z-index:1;
+  height:100%;
+  align-items:center;
+}
+
+/* Real club logo, copied from the original DIGIT.all-owned repository.
+   Pale backdrop keeps the logo's navy subtitle legible at all screen widths. */
+.official-wordmark {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-shrink:0;
+  box-sizing:border-box;
+  padding:4px 8px;
+  background:linear-gradient(145deg,#f8fbff,#eaf5ff);
+  border:1px solid rgba(208,233,255,.96);
+  border-radius:11px;
+  box-shadow:0 4px 18px rgba(0,0,0,.12),0 0 15px rgba(137,216,247,.14);
+  font-size:0;
+  line-height:0;
+  letter-spacing:0;
+  transition:box-shadow .25s,transform .25s;
+}
+.official-wordmark:hover,.official-wordmark:focus-visible {
+  box-shadow:0 7px 23px rgba(0,0,0,.15),0 0 27px rgba(186,255,119,.28);
+  transform:translateY(-1px);
+}
+.official-wordmark .official-logo {
+  display:block;
+  width:100%;
+  height:100%;
+  max-width:none;
+  object-fit:contain;
+}
+.site-header .official-wordmark { width:153px; height:67px; }
+.footer-wordmark.official-wordmark { width:218px; height:103px; padding:8px 12px; }
+@media(max-width:760px) {
+  .site-header .official-wordmark {width:128px;height:56px;padding:3px 6px;border-radius:9px;}
+  .footer-wordmark.official-wordmark {width:200px;height:94px;}
+  .ticker::before {top:-70px;height:71px;}
+  .ticker::after {bottom:-77px;height:78px;}
+}
+@media(max-width:420px) {
+  .site-header .official-wordmark {width:117px;height:51px;padding:3px 5px;}
+}
+@media(prefers-reduced-motion:reduce) {
+  .ticker::before,.ticker::after {animation:none!important;}
+  .official-wordmark {transition:none!important;}
+}
