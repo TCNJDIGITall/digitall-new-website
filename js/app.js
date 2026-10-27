@@ -52,18 +52,85 @@
     });
   }
 
+  // Each current officer gets a portrait card. Photos load only when a verified path is added.
   const teamGrid = document.getElementById('team-grid');
   if (teamGrid && Array.isArray(data.leadership)) {
     teamGrid.replaceChildren();
-    const symbols = ['✳', '⌘', '✦', '◈', '✴', '↗', '✺'];
+    const accents = ['#baff77', '#c7afff', '#7ccbea', '#f6c2b0', '#a9d9ce', '#dfbafb', '#baff77'];
     data.leadership.forEach((person, index) => {
-      const card = document.createElement('article'); card.className = 'team-card reveal';
-      const top = document.createElement('div'); top.className = 'team-symbol'; top.textContent = symbols[index % symbols.length]; top.setAttribute('aria-hidden', 'true');
-      const info = document.createElement('div'); info.className = 'team-info';
-      const role = document.createElement('span'); role.className = 'team-role'; role.textContent = person.role;
-      const name = document.createElement('h3'); name.textContent = person.name;
-      info.append(role, name); card.append(top, info); teamGrid.append(card);
+      const card = document.createElement('article');
+      card.className = 'team-card reveal';
+      card.style.setProperty('--accent', accents[index % accents.length]);
+      card.style.setProperty('--reveal-delay', String((index % 4) * 85) + 'ms');
+      const portrait = document.createElement('div');
+      portrait.className = 'team-portrait';
+      const monogram = document.createElement('span');
+      monogram.className = 'team-initials';
+      const words = (person.name || '').trim().split(/\s+/).filter(Boolean);
+      monogram.textContent = (words[0]?.[0] || '') + (words.length > 1 ? words[words.length - 1][0] : '');
+      monogram.setAttribute('aria-hidden', 'true');
+      const photoStatus = document.createElement('span');
+      photoStatus.className = 'team-portrait-label';
+      photoStatus.textContent = 'PORTRAIT TO COME';
+      portrait.append(monogram, photoStatus);
+      if (typeof person.photo === 'string' && /^assets\/eboard\/[a-z\d._-]+\.(?:png|jpg|jpeg|webp)$/i.test(person.photo)) {
+        const img = document.createElement('img');
+        img.className = 'team-headshot';
+        img.alt = 'Portrait of ' + person.name;
+        img.src = person.photo;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.addEventListener('load', () => portrait.classList.add('has-photo'), { once: true });
+        img.addEventListener('error', () => img.remove(), { once: true });
+        portrait.append(img);
+      }
+      const info = document.createElement('div');
+      info.className = 'team-info';
+      const top = document.createElement('div');
+      top.className = 'team-info-top';
+      const role = document.createElement('span');
+      role.className = 'team-role';
+      role.textContent = person.role;
+      const number = document.createElement('span');
+      number.className = 'team-number';
+      number.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(data.leadership.length).padStart(2, '0');
+      top.append(role, number);
+      const name = document.createElement('h3');
+      name.textContent = person.name;
+      info.append(top, name);
+      card.append(portrait, info);
+      teamGrid.append(card);
     });
+  }
+
+  // Track page scroll and highlight the section currently being read.
+  const progressTrack = document.createElement('div');
+  progressTrack.className = 'scroll-progress';
+  progressTrack.setAttribute('aria-hidden', 'true');
+  const progressBar = document.createElement('span');
+  progressTrack.append(progressBar);
+  document.querySelector('.site-header')?.append(progressTrack);
+  let ticking = false;
+  const updateProgress = () => {
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    progressBar.style.transform = 'scaleX(' + Math.min(1, Math.max(0, window.scrollY / max)) + ')';
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(updateProgress); }
+  }, { passive: true });
+  window.addEventListener('resize', updateProgress);
+  updateProgress();
+  const navLinks = [...document.querySelectorAll('.primary-nav a[href^="#"]')];
+  if ('IntersectionObserver' in window) {
+    const activeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => link.classList.toggle('is-active', link.getAttribute('href') === '#' + entry.target.id));
+        }
+      });
+    }, { rootMargin: '-22% 0px -65% 0px' });
+    document.querySelectorAll('main section[id]').forEach(section => activeObserver.observe(section));
   }
 
   const year = document.getElementById('footer-year'); if (year) year.textContent = String(new Date().getFullYear());
