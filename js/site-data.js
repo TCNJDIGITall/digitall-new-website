@@ -3,6 +3,9 @@
  * Event schedule adapted from the club's shared Fall 2026 planning document.
  * Planned activities are NOT confirmed announcements; verify before publishing.
  * Leadership names are from TCNJ's official 2026–27 student organizations page.
+ * To add a photo, put a verified headshot at assets/eboard/name.jpg,
+ * then add photo: "assets/eboard/name.jpg" to the matching entry.
+ * Do not use photos of past officers for current names.
  */
 window.DIGITALL_DATA = {
   events: [
