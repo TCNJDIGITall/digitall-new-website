@@ -1,0 +1,288 @@
+/*
+ * DIGIT.all — Aurora theme
+ * Layered cobalt / teal / violet light. No images, tracking, or external JS.
+ * The separate effects file keeps the underlying site easy to maintain.
+ */
+:root {
+  --bg: #101c38;
+  --bg2: #17264c;
+  --panel: #1c3053;
+  --ambient-progress: 0;
+  --ambient-scroll: 0px;
+  --ambient-cyan: #67d9ef;
+  --ambient-violet: #a887f7;
+  --ambient-mint: #baff77;
+}
+
+body {
+  background: #101c38;
+  background-image: linear-gradient(145deg,#101d3b 0%,#1c2654 40%,#142941 73%,#1e2350 100%);
+  color: var(--ink);
+}
+
+.ambient-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(115deg,rgba(58,91,154,.09),rgba(109,74,172,.13) 50%,rgba(44,147,164,.09));
+}
+.ambient-grid {
+  position: absolute;
+  inset: -10%;
+  opacity: .4;
+  background-image:
+    radial-gradient(circle,rgba(193,222,255,.22) 1px,transparent 1.7px),
+    linear-gradient(90deg,rgba(155,186,246,.055) 1px,transparent 1px),
+    linear-gradient(rgba(155,186,246,.055) 1px,transparent 1px);
+  background-size: 56px 56px,112px 112px,112px 112px;
+  mask-image: linear-gradient(to bottom,transparent 0%,#000 20%,#000 78%,transparent 100%);
+  transform: translate3d(0,calc(var(--ambient-scroll) * -.11),0);
+}
+.ambient-orb {
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(37px);
+  opacity: .48;
+  will-change: transform;
+  transition: opacity .5s;
+}
+.ambient-orb::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  animation: ambientDrift 17s ease-in-out infinite alternate;
+}
+.ambient-orb--one {
+  top: -20vmax;
+  left: -18vmax;
+  width: min(86vw,78vmax);
+  height: min(86vw,78vmax);
+  transform: translate3d(0,calc(var(--ambient-scroll) * -.32),0);
+}
+.ambient-orb--one::before {
+  background: radial-gradient(circle,rgba(104,120,255,.43) 0%,rgba(91,100,223,.24) 42%,transparent 71%);
+}
+.ambient-orb--two {
+  top: 24%;
+  right: -24vmax;
+  width: min(85vw,83vmax);
+  height: min(85vw,83vmax);
+  transform: translate3d(0,calc(var(--ambient-scroll) * .27),0);
+}
+.ambient-orb--two::before {
+  background: radial-gradient(circle,rgba(66,213,232,.38) 0%,rgba(45,175,205,.21) 43%,transparent 72%);
+  animation-delay: -7s;
+  animation-duration: 19s;
+}
+.ambient-orb--three {
+  bottom: -30vmax;
+  left: 3vw;
+  width: min(84vw,74vmax);
+  height: min(84vw,74vmax);
+  transform: translate3d(0,calc(var(--ambient-scroll) * -.2),0);
+}
+.ambient-orb--three::before {
+  background: radial-gradient(circle,rgba(170,114,255,.41) 0%,rgba(151,92,218,.23) 44%,transparent 73%);
+  animation-delay: -13s;
+  animation-duration: 23s;
+}
+.ambient-orb--four {
+  top: 31%;
+  left: 27%;
+  width: min(60vw,44vmax);
+  height: min(60vw,44vmax);
+  opacity: .24;
+  transform: translate3d(0,calc(var(--ambient-scroll) * .12),0);
+}
+.ambient-orb--four::before {
+  background: radial-gradient(circle,rgba(173,255,164,.31),rgba(117,246,187,.1) 46%,transparent 73%);
+  animation-delay: -5s;
+}
+.ambient-pointer-light {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 470px;
+  height: 470px;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(circle,rgba(107,212,241,.13),rgba(154,121,244,.075) 36%,transparent 70%);
+  transform: translate3d(-600px,-600px,0);
+  transition: opacity .4s;
+  will-change: transform;
+  mix-blend-mode: screen;
+}
+@media(hover:hover) and (pointer:fine) {
+  .ambient-pointer-light { display: block; }
+  .ambient-scene.has-pointer .ambient-pointer-light { opacity: 1; }
+}
+@keyframes ambientDrift {
+  0%   { transform: translate3d(-3%,2%,0) scale(.94); }
+  50%  { transform: translate3d(5%,-3%,0) scale(1.08); }
+  100% { transform: translate3d(-2%,5%,0) scale(.97); }
+}
+
+/* Keep every interactive section above the atmospheric layer. */
+main, .site-footer { position: relative; z-index: 1; }
+.site-header {
+  background: rgba(19,33,66,.91);
+  border-bottom: 1px solid rgba(189,215,255,.19);
+  box-shadow: 0 9px 38px rgba(30,24,77,.16);
+}
+.site-header .scroll-progress span { box-shadow: 0 0 14px rgba(113,225,240,.46); }
+
+/* Thematic color shifts between sections rather than blocks of black. */
+.hero {
+  background:
+    radial-gradient(ellipse 75% 92% at 1% 10%,rgba(83,101,196,.25),transparent 75%),
+    radial-gradient(ellipse 80% 85% at 96% 74%,rgba(49,183,196,.16),transparent 76%),
+    linear-gradient(120deg,rgba(19,37,76,.77),rgba(34,34,82,.7) 56%,rgba(18,58,73,.69));
+}
+.hero-grid { opacity: .22; }
+.section-about {
+  background:
+    radial-gradient(ellipse 60% 63% at 85% 22%,rgba(143,117,239,.19),transparent 77%),
+    radial-gradient(ellipse 60% 54% at 9% 91%,rgba(70,161,225,.13),transparent 80%),
+    linear-gradient(122deg,rgba(23,46,85,.89),rgba(37,36,88,.88));
+}
+.section-events {
+  background:
+    radial-gradient(ellipse 62% 56% at 12% 10%,rgba(60,174,221,.17),transparent 80%),
+    radial-gradient(ellipse 75% 70% at 97% 92%,rgba(153,103,234,.18),transparent 80%),
+    linear-gradient(145deg,rgba(19,43,77,.9),rgba(26,38,83,.91));
+}
+.section-team {
+  background:
+    radial-gradient(ellipse 67% 70% at 94% 15%,rgba(155,114,251,.21),transparent 80%),
+    radial-gradient(ellipse 58% 55% at 5% 92%,rgba(66,187,197,.12),transparent 83%),
+    linear-gradient(120deg,rgba(34,37,83,.91),rgba(25,47,83,.88));
+}
+.join-section {
+  background:
+    radial-gradient(ellipse 75% 71% at 65% 83%,rgba(55,189,171,.15),transparent 75%),
+    linear-gradient(130deg,rgba(22,49,75,.93),rgba(36,35,81,.91));
+}
+.site-footer {
+  background:
+    radial-gradient(ellipse at 17% 5%,rgba(105,109,219,.16),transparent 65%),
+    linear-gradient(130deg,#172648,#1d214b 55%,#172f46);
+  border-top: 1px solid rgba(171,204,249,.13);
+}
+
+/* Text stays bright; the new colors never become competing text backgrounds. */
+.hero-description, .intro-aside p, .section-heading>p, .meeting-banner p {
+  text-shadow: 0 2px 20px rgba(9,20,50,.2);
+}
+.intro-aside p, .section-heading>p { color: #e5eaf8; }
+.hero-bottom, .hero-bottom>a { color: #d1dff4; }
+.muted-highlight { color: #c9d5f7; }
+.section-label { color: #caff8f; }
+.event-panel {
+  background: rgba(26,42,73,.95);
+  border-color: rgba(155,195,255,.33);
+  box-shadow: 0 24px 70px rgba(9,15,38,.24), 0 1px 0 rgba(167,206,255,.08) inset;
+}
+.events-heading { background: rgba(47,58,102,.77); }
+.event-row:hover, .event-row:focus-within { background: rgba(60,76,131,.47); }
+.event-date { background: #293e67; border-color: #536b92; }
+.team-card { background: #263457; border-color: #546487; }
+.team-card:hover, .team-card.reveal.visible:hover, .team-card:focus-within { background: #30426b; }
+.mailing-signup {
+  background: linear-gradient(137deg,#21365e,#252e60 62%,#204b5f);
+  border-color: rgba(173,203,251,.34);
+  box-shadow: 0 21px 70px rgba(7,20,43,.28);
+}
+.meeting-banner { background: linear-gradient(115deg,#243e6a,#284965 80%); border-color: #597998; }
+.meeting-banner p { color:#e0eafd; }
+.club-dialog {
+  background: linear-gradient(142deg,#1e3157,#292958 70%,#1c4a5c);
+  border-color:#7182b5;
+}
+.mailing-signup-heading p,.dialog-description { color:#e4ecfb; }
+.feature-card { box-shadow:0 20px 48px rgba(11,17,49,.2); }
+
+/* A local spotlight follows the pointer inside cards without tracking visitors. */
+:where(.feature-card,.team-card,.event-row,.mailing-signup,.meeting-banner,.event-panel,.join-inner) {
+  --glow-x: 50%;
+  --glow-y: 50%;
+  position: relative;
+  isolation: isolate;
+}
+:where(.feature-card,.team-card,.event-row,.mailing-signup,.meeting-banner,.event-panel,.join-inner)::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:0;
+  background:radial-gradient(320px circle at var(--glow-x) var(--glow-y),rgba(182,227,255,.22),rgba(178,149,255,.10) 42%,transparent 73%);
+  transition:opacity .3s ease;
+}
+:where(.feature-card,.team-card,.event-row,.mailing-signup,.meeting-banner,.event-panel,.join-inner):hover::after,
+:where(.feature-card,.team-card,.event-row,.mailing-signup,.meeting-banner,.event-panel,.join-inner):focus-within::after {
+  opacity:1;
+}
+.feature-card:hover, .feature-card:focus-within {
+  box-shadow: 0 26px 65px rgba(69,92,164,.4),0 0 0 2px rgba(235,249,255,.44),0 0 34px rgba(136,151,255,.32);
+}
+.team-card:hover, .team-card:focus-within {
+  box-shadow: 0 25px 58px rgba(40,67,134,.43), 0 0 30px rgba(138,128,244,.32),0 0 0 1px var(--accent,#c7afff);
+}
+.event-row:hover, .event-row:focus-within {
+  box-shadow: inset 3px 0 0 #85eadd,inset 0 0 38px rgba(117,173,243,.09);
+}
+.meeting-banner:hover, .meeting-banner:focus-within,
+.mailing-signup:hover, .mailing-signup:focus-within,
+.event-panel:hover {
+  box-shadow:0 28px 76px rgba(22,50,105,.36),0 0 42px rgba(95,157,224,.17),0 0 0 1px rgba(143,225,236,.38);
+}
+.join-inner:hover,.join-inner:focus-within {
+  box-shadow: 0 26px 85px rgba(85,216,173,.17),0 0 46px rgba(123,248,186,.28);
+}
+.btn:hover, .btn:focus-visible, .header-cta:hover, .header-cta:focus-visible {
+  box-shadow:0 10px 30px rgba(99,188,239,.21),0 0 19px rgba(136,255,182,.18);
+}
+.btn-primary:hover,.mailing-submit:hover {
+  box-shadow:0 12px 34px rgba(186,255,119,.24),0 0 25px rgba(186,255,119,.37);
+}
+.site-footer a:hover,.text-link:hover {
+  text-shadow:0 0 17px rgba(179,235,255,.45);
+}
+
+/* Keep all widgets and controls clickable above decorative overlays. */
+.mailing-signup > *, .event-panel > *, .meeting-banner > *,.join-inner > * { position:relative; z-index:2; }
+.event-row > .event-open,.team-card > .team-card-open { z-index:4; }
+.mailing-signup .mailing-form input { position:relative; z-index:3; }
+
+/* Dialogs live in the browser's top layer and should stay crisp. */
+.club-dialog { isolation:auto; }
+
+/* Small screens still get color, but no cursor glow or heavy animation. */
+@media(max-width:760px) {
+  .ambient-orb { filter:blur(30px);opacity:.28; }
+  .ambient-orb--four { display:none; }
+  .section-about,.section-events,.section-team,.join-section { background-size:cover; }
+  .event-panel { background:rgba(27,43,74,.97); }
+  .hero { background:linear-gradient(145deg,rgba(26,42,82,.9),rgba(23,49,78,.85)); }
+  .team-card:hover { transform:none; }
+}
+@media(hover:none), (pointer:coarse) {
+  .ambient-pointer-light { display:none!important; }
+  .ambient-grid { opacity:.22; }
+  .event-row { box-shadow:none; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .ambient-orb,.ambient-grid {transform:none!important;}
+  .ambient-orb::before {animation:none!important;}
+  .ambient-pointer-light{display:none!important;}
+  :where(.feature-card,.team-card,.event-row,.mailing-signup,.meeting-banner,.event-panel,.join-inner)::after {transition:none!important;}
+}
