@@ -16,3 +16,68 @@
 @media(max-width:420px){.header-cta{display:none}.hero-copy h1{font-size:43px}.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .btn{justify-content:space-between}.art-core-title{font-size:45px;letter-spacing:-3px}.art-badge{font-size:9px;padding:10px}.badge-icon,.small-avatar{height:30px;width:30px}.team-grid{grid-template-columns:1fr}.team-card{min-height:150px;flex-direction:row;align-items:center;gap:15px}.team-info{flex:1}.team-symbol{font-size:50px}.hero-bottom span:first-child{display:none}.footer-links{gap:16px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
 
+
+
+/* READABILITY + PORTRAIT GRID + ANIMATIONS — OCT 2026 */
+:root{--muted:#c6d1e2}
+body{font-size:17px;line-height:1.65}
+.primary-nav{font-size:15px;color:#e5ecf5;gap:28px}
+.primary-nav a{position:relative}
+.primary-nav a:after{content:"";position:absolute;left:0;right:100%;bottom:-9px;height:2px;background:var(--green);transition:right .25s ease}
+.primary-nav a:hover:after,.primary-nav a.is-active:after{right:0}
+.btn,.header-cta{font-size:15px}
+.hero-description{font-size:clamp(18px,1.7vw,21px);line-height:1.65;color:#e1e9f6}
+.intro-aside p{font-size:17px;line-height:1.75}
+.feature-bottom p{font-size:16px;line-height:1.6;opacity:1}
+.section-heading>p{font-size:17px;line-height:1.7;color:#e0e7f4}
+.event-info h3{font-size:23px}
+.event-info p{font-size:16px;line-height:1.7;color:#d9e4f1}
+.event-end,.meeting-banner p{font-size:15px;color:#dce5f4}
+.section-label{font-size:13px;letter-spacing:1px;font-weight:800}
+.events-heading,.event-category,.event-status,.meeting-eyebrow{font-size:12px}
+.section-number{font-size:12px}
+.events-footer,.team-note,.footer-top p,.footer-links a,.footer-bottom{font-size:14px;line-height:1.65}
+.no-script-note{font-size:16px}
+.team-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.team-card{--accent:#baff77;display:flex;flex-direction:column;justify-content:flex-start;min-height:0;padding:0;overflow:hidden;border:1px solid #41526c;background:#19273c;border-radius:18px;box-shadow:0 14px 42px rgba(1,5,15,.17);transition:transform .4s cubic-bezier(.2,.8,.2,1),background .35s,border-color .35s,box-shadow .35s}
+.team-card:hover,.team-card.reveal.visible:hover{background:#20324a;border-color:var(--accent);transform:translateY(-8px);box-shadow:0 20px 45px rgba(0,0,0,.28)}
+.team-portrait{aspect-ratio:4/3;position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 22% 25%,color-mix(in srgb,var(--accent) 27%,transparent),transparent 40%),linear-gradient(135deg,#28364e,#101b30);border-bottom:1px solid #41526c}
+.team-portrait:before{content:"";position:absolute;inset:16px;border-radius:50%;border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);transform:scale(.88);transition:transform .6s}
+.team-portrait:after{content:"";position:absolute;width:165%;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);top:70%;left:-30%;transform:rotate(-26deg);opacity:.42;transition:transform .65s}
+.team-card:hover .team-portrait:before{transform:scale(1.08)}
+.team-card:hover .team-portrait:after{transform:translateY(-19px) rotate(-26deg)}
+.team-initials{color:var(--accent);font:700 clamp(74px,8vw,108px)/1 var(--font-heading);letter-spacing:-6px;text-shadow:0 10px 45px rgba(0,0,0,.24);transition:transform .5s}
+.team-card:hover .team-initials{transform:scale(1.08) rotate(-3deg)}
+.team-portrait-label{position:absolute;bottom:17px;left:19px;color:#f4f7ff;font:700 11px/1.4 var(--font-heading);letter-spacing:1.25px}
+.team-headshot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;z-index:2}
+.team-portrait.has-photo .team-initials,.team-portrait.has-photo .team-portrait-label{opacity:0}
+.team-info{padding:23px 23px 26px;flex:1;min-height:128px}
+.team-info-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.team-role{color:var(--accent);font:700 12px/1.4 var(--font-heading);letter-spacing:1px}
+.team-number{color:#bdcadd;font:600 12px var(--font-heading);white-space:nowrap}
+.team-info h3{font:700 clamp(23px,2.1vw,29px)/1.18 var(--font-heading);letter-spacing:-1px;margin:13px 0 0;color:white;overflow-wrap:anywhere}
+.team-card.reveal{transition-delay:var(--reveal-delay,0ms)}
+.portrait-note{display:flex;align-items:center;gap:12px;border:1px dashed #475c73;background:#152338;border-radius:13px;padding:15px 19px;margin:28px 0 0;color:#e2ebf6;font-size:15px;line-height:1.65}
+.portrait-note span{font-size:25px;color:var(--green)}
+.team-note{color:#bfcbde;font-size:13px;margin-top:16px}
+.scroll-progress{position:absolute;bottom:0;left:0;right:0;height:3px;pointer-events:none;z-index:10}
+.scroll-progress span{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--green),var(--blue),var(--purple));transform:scaleX(0);transform-origin:left}
+@keyframes tickerSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes gentleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes starDance{0%,100%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-15px) rotate(13deg)}}
+@keyframes shimmerGlow{0%,100%{opacity:.8}50%{opacity:1}}
+.ticker-track{width:max-content;min-width:0;flex-shrink:0;justify-content:flex-start;animation:tickerSlide 36s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.hero-art{animation:gentleFloat 8s ease-in-out infinite}
+.art-floating{animation:starDance 6s ease-in-out infinite}
+.star-two{animation-delay:-2s}.star-three{animation-delay:-4s}
+.glow{animation:shimmerGlow 7s ease-in-out infinite alternate}
+.feature-card .feature-symbol{transition:transform .45s ease}
+.feature-card:hover .feature-symbol{transform:translateY(-8px) rotate(2deg) scale(1.05)}
+.event-row{transition:background .3s ease,transform .3s ease}
+.event-row:hover{transform:translateX(3px)}
+.btn:focus-visible,.team-card:focus-within{outline:3px solid var(--green);outline-offset:3px}
+@media(max-width:1000px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.team-info h3{font-size:25px}}
+@media(max-width:760px){body{font-size:16px}.hero-description{font-size:18px}.intro-aside p,.section-heading>p,.feature-bottom p,.event-info p{font-size:16px}.meeting-banner p,.footer-links a{font-size:14px}.team-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.team-card{padding:0;min-height:0}.team-info{padding:16px 16px 20px;min-height:0}.team-info h3{font-size:clamp(19px,3.8vw,24px);margin-top:10px}.team-role,.team-number{font-size:11px}.team-initials{font-size:clamp(55px,12vw,86px)}.team-portrait-label{font-size:9px;bottom:12px;left:12px}.portrait-note{font-size:14px}.event-info h3{font-size:20px}.event-end{font-size:13px}}
+@media(max-width:520px){.team-grid{grid-template-columns:1fr}.team-card{display:flex;flex-direction:column;align-items:stretch;gap:0;min-height:0}.team-portrait{aspect-ratio:16/10}.team-info{padding:20px}.team-info h3{font-size:25px}.team-initials{font-size:92px}.team-portrait-label{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.ticker-track,.hero-art,.art-floating,.glow{animation:none!important}.team-card,.team-portrait:before,.team-portrait:after,.team-initials,.feature-card .feature-symbol,.event-row{transition:none!important}}
