@@ -21,6 +21,9 @@ jobs:
         with:
           persist-credentials: true
 
+      - name: Verify schedule parser
+        run: python3 -m unittest discover -s tests -v
+
       - name: Read published Google Doc and rebuild events
         run: python3 scripts/sync_drive_schedule.py
 
