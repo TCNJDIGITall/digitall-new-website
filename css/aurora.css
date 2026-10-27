@@ -289,119 +289,43 @@ main, .site-footer { position: relative; z-index: 1; }
 }
 
 
-/* Full-width neon-green glow on the values strip directly below the hero. */
+/* Calm sage-green values strip.
+   No exterior glow or pseudo-element lighting: neighboring text stays legible.
+   The ticker's scrolling content is still clipped by .ticker-window. */
 .ticker {
   position: relative;
-  z-index: 2;
   isolation: isolate;
+  z-index: 12;
   width: 100%;
-  background: linear-gradient(
-    90deg,
-    #baff77 0%,
-    #d3ffa0 25%,
-    #baff77 52%,
-    #c7ff90 76%,
-    #baff77 100%
-  );
-  border-top: 1px solid rgba(243,255,211,.65);
-  border-bottom: 1px solid rgba(193,255,158,.55);
-  box-shadow:
-    0 -10px 38px rgba(186,255,119,.32),
-    0 13px 48px rgba(186,255,119,.38),
-    0 0 78px rgba(186,255,119,.22),
-    inset 0 5px 20px rgba(255,255,255,.34),
-    inset 0 -8px 22px rgba(104,217,83,.22);
+  overflow: visible;
+  background: #486f62;
+  color: #f4fff8;
+  border-top: 1px solid rgba(186,221,203,.26);
+  border-bottom: 1px solid rgba(12,43,32,.19);
+  box-shadow: none;
 }
-.ticker::before {
-  content:"";
-  pointer-events:none;
-  position:absolute;
-  inset:0;
-  z-index:0;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.30),transparent 42%,rgba(125,246,92,.22)),
-    linear-gradient(90deg,rgba(224,255,161,.12),rgba(255,255,255,.23) 50%,rgba(224,255,161,.12));
-  animation: tickerFullGlow 6s ease-in-out infinite alternate;
+.ticker::before,
+.ticker::after {
+  content: none;
+  display: none;
+  background: none;
+  animation: none;
+}
+.ticker-window {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 .ticker-track {
   position: relative;
   z-index: 1;
-  color: #182b20;
-}
-@keyframes tickerFullGlow {
-  0% {opacity:.68;}
-  100% {opacity:1;}
-}
-@media(prefers-reduced-motion:reduce) {
-  .ticker::before {animation:none!important;opacity:.9;}
-}
-
-
-/* MUTED MINT TICKER
-   Preserve the entire full-width strip, but avoid the neon brightness.
-   Only a near-invisible edge halo remains above and below. */
-.ticker {
-  position: relative;
-  overflow: visible;
-  isolation: isolate;
-  z-index: 12;
-  width: 100%;
-  background: #83bf9e;
-  color: #112837;
-  border-top: 1px solid rgba(205,247,214,.24);
-  border-bottom: 1px solid rgba(48,116,91,.22);
-  box-shadow:
-    0 -5px 18px rgba(131,191,158,.035),
-    0 5px 18px rgba(131,191,158,.04);
-}
-.ticker::before {
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  top:-36px;
-  height:37px;
-  pointer-events:none;
-  z-index:0;
-  animation:none;
-  opacity:1;
-  background:linear-gradient(to top,
-    rgba(131,191,158,.065) 0%,
-    rgba(131,191,158,.025) 50%,
-    rgba(131,191,158,0) 100%);
-}
-.ticker::after {
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:-36px;
-  height:37px;
-  pointer-events:none;
-  z-index:0;
-  animation:none;
-  opacity:1;
-  background:linear-gradient(to bottom,
-    rgba(131,191,158,.065) 0%,
-    rgba(131,191,158,.025) 50%,
-    rgba(131,191,158,0) 100%);
-}
-.ticker-window {
-  position: relative;
-  z-index:1;
-  display:flex;
-  align-items:center;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  clip-path:inset(0);
-}
-.ticker-track {
-  flex-shrink:0;
-  z-index:1;
-  height:100%;
-  align-items:center;
-  color:#112837;
+  height: 100%;
+  flex-shrink: 0;
+  align-items: center;
+  color: #f4fff8;
 }
 
 /* Real club logo, copied from the original DIGIT.all-owned repository.
@@ -438,13 +362,12 @@ main, .site-footer { position: relative; z-index: 1; }
 @media(max-width:760px) {
   .site-header .official-wordmark {width:128px;height:56px;padding:3px 6px;border-radius:9px;}
   .footer-wordmark.official-wordmark {width:200px;height:94px;}
-  .ticker::before {top:-28px;height:29px;}
-  .ticker::after {bottom:-28px;height:29px;}
+
 }
 @media(max-width:420px) {
   .site-header .official-wordmark {width:117px;height:51px;padding:3px 5px;}
 }
 @media(prefers-reduced-motion:reduce) {
-  .ticker::before,.ticker::after {animation:none!important;}
+
   .official-wordmark {transition:none!important;}
 }
