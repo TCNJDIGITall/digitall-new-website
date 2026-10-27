@@ -69,3 +69,14 @@ The club-owned GitHub account must retain control of the repository. Give incomi
 - DIGIT.all Instagram: https://www.instagram.com/tcnjdigit.all/
 - Club contact: tcnjdigit.allcs@gmail.com
 - Events: club-maintained DIGIT.ALL Drive schedule and promotional flyers.
+
+## Visual design, hover glow, and scrolling background
+
+The vibrant aurora background and hover lighting are intentionally **separate from the main CSS and JavaScript**:
+
+- `css/aurora.css`: blue, teal, violet, and mint gradients; gently drifting light; hover/focus effects; responsive behavior.
+- `js/aurora.js`: passive scroll-based parallax and pointer-based card illumination. Uses `requestAnimationFrame` and never sends visitor coordinates anywhere.
+
+To adjust the background, edit `css/aurora.css`. Most of the color tuning is in the `--ambient-*` palette and the section-specific gradient blocks. You can remove the aurora layer without affecting mailing list, events, or E-Board functionality by unlinking these two files from `index.html` and removing the decorative `ambient-scene` element.
+
+Accessibility: users who prefer reduced motion see the same colors without movement. On touchscreen devices, the pointer-following glow is disabled.
