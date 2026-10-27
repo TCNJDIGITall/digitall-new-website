@@ -337,53 +337,54 @@ main, .site-footer { position: relative; z-index: 1; }
 }
 
 
-/* SOFT FULL-WIDTH GREEN HALO
-   The marquee is clipped inside .ticker-window, not around the whole bar.
-   Light extends evenly across the full width, gently above and below. */
+/* MUTED MINT TICKER
+   Preserve the entire full-width strip, but avoid the neon brightness.
+   Only a near-invisible edge halo remains above and below. */
 .ticker {
   position: relative;
   overflow: visible;
   isolation: isolate;
   z-index: 12;
   width: 100%;
-  background: #baff77;
-  border-top: 1px solid rgba(220,255,182,.55);
-  border-bottom: 1px solid rgba(193,244,144,.48);
+  background: #83bf9e;
+  color: #112837;
+  border-top: 1px solid rgba(205,247,214,.24);
+  border-bottom: 1px solid rgba(48,116,91,.22);
   box-shadow:
-    0 -8px 24px rgba(186,255,119,.10),
-    0 8px 26px rgba(186,255,119,.12),
-    inset 0 2px 8px rgba(255,255,255,.08);
+    0 -5px 18px rgba(131,191,158,.035),
+    0 5px 18px rgba(131,191,158,.04);
 }
 .ticker::before {
   content:"";
   position:absolute;
   left:0;
   right:0;
-  top:-55px;
-  height:56px;
+  top:-36px;
+  height:37px;
   pointer-events:none;
   z-index:0;
   animation:none;
+  opacity:1;
   background:linear-gradient(to top,
-    rgba(186,255,119,.16) 0%,
-    rgba(186,255,119,.10) 24%,
-    rgba(186,255,119,.045) 62%,
-    rgba(186,255,119,0) 100%);
+    rgba(131,191,158,.065) 0%,
+    rgba(131,191,158,.025) 50%,
+    rgba(131,191,158,0) 100%);
 }
 .ticker::after {
   content:"";
   position:absolute;
   left:0;
   right:0;
-  bottom:-58px;
-  height:59px;
+  bottom:-36px;
+  height:37px;
   pointer-events:none;
   z-index:0;
+  animation:none;
+  opacity:1;
   background:linear-gradient(to bottom,
-    rgba(186,255,119,.17) 0%,
-    rgba(186,255,119,.10) 24%,
-    rgba(186,255,119,.045) 62%,
-    rgba(186,255,119,0) 100%);
+    rgba(131,191,158,.065) 0%,
+    rgba(131,191,158,.025) 50%,
+    rgba(131,191,158,0) 100%);
 }
 .ticker-window {
   position: relative;
@@ -400,6 +401,7 @@ main, .site-footer { position: relative; z-index: 1; }
   z-index:1;
   height:100%;
   align-items:center;
+  color:#112837;
 }
 
 /* Real club logo, copied from the original DIGIT.all-owned repository.
@@ -436,8 +438,8 @@ main, .site-footer { position: relative; z-index: 1; }
 @media(max-width:760px) {
   .site-header .official-wordmark {width:128px;height:56px;padding:3px 6px;border-radius:9px;}
   .footer-wordmark.official-wordmark {width:200px;height:94px;}
-  .ticker::before {top:-40px;height:41px;}
-  .ticker::after {bottom:-43px;height:44px;}
+  .ticker::before {top:-28px;height:29px;}
+  .ticker::after {bottom:-28px;height:29px;}
 }
 @media(max-width:420px) {
   .site-header .official-wordmark {width:117px;height:51px;padding:3px 5px;}
