@@ -22,9 +22,21 @@
   }
 
   const eventList = document.getElementById('event-list');
-  if (eventList && Array.isArray(data.events)) {
+  function renderEvents(events) {
+    if (!eventList || !Array.isArray(events)) return;
+    const todayParts = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", year:"numeric", month:"2-digit", day:"2-digit" }).formatToParts(new Date());
+    const datePart = k => todayParts.find(p => p.type === k)?.value || "";
+    const today = datePart("year") + "-" + datePart("month") + "-" + datePart("day");
+    const upcoming = events.filter(e => e && typeof e.date === "string" && e.date >= today).sort((a,b) => a.date.localeCompare(b.date));
     eventList.replaceChildren();
-    data.events.forEach(event => {
+    if (!upcoming.length) {
+      const msg = document.createElement("p");
+      msg.className = "no-script-note";
+      msg.textContent = "No upcoming events are listed yet. Check our Instagram for announcements.";
+      eventList.append(msg);
+      return;
+    }
+    upcoming.forEach(event => {
       const row = document.createElement('article');
       row.className = 'event-row';
       const parsed = /^\d{4}-\d{2}-\d{2}$/.test(event.date) ? new Date(`${event.date}T12:00:00`) : null;
@@ -50,7 +62,45 @@
       row.append(dateBox, textBox, end);
       eventList.append(row);
     });
+
   }
+  // Grab the latest event data directly from the connected GitHub repository.
+  // GitHub Pages does not always rebuild when Actions changes a JSON file, so
+  // the raw-file URL is checked first; the deployed copy and old data are fallbacks.
+  renderEvents(data.events);
+  async function loadLatestEvents() {
+    const sources = [
+      "https://raw.githubusercontent.com/TCNJDIGITall/digitall-new-website/main/data/events.json",
+      "data/events.json"
+    ];
+    for (const source of sources) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 6500);
+      try {
+        const response = await fetch(source + "?cb=" + Math.floor(Date.now() / 3600000), {
+          cache: "no-store", signal: controller.signal
+        });
+        if (!response.ok) throw new Error("Events unavailable");
+        const payload = await response.json();
+        if (!payload || !Array.isArray(payload.events) || !payload.events.every(e => e && typeof e.title === "string" && typeof e.date === "string")) {
+          throw new Error("Invalid event data");
+        }
+        renderEvents(payload.events);
+        const label = document.getElementById("events-sync-status");
+        if (label) {
+          label.textContent = payload.synced_at
+            ? "Events are automatically synced from the DIGIT.all Drive planning schedule. Check Instagram for confirmations."
+            : "Events are based on the DIGIT.all planning schedule. Check Instagram for confirmations.";
+        }
+        return;
+      } catch (err) {
+        // Keep the most recent valid event cards if a network connection fails.
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+  }
+  loadLatestEvents();
 
   // Each current officer gets a portrait card. Photos load only when a verified path is added.
   const teamGrid = document.getElementById('team-grid');
