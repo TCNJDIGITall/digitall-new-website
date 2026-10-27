@@ -337,42 +337,37 @@ main, .site-footer { position: relative; z-index: 1; }
 }
 
 
-/* FULL-WIDTH GREEN HALO
-   The ticker's marquee is clipped only inside .ticker-window.
-   The outer ticker can now cast soft light into the sections ABOVE and BELOW.
-   Both halos use purely vertical gradients with NO horizontal fading. */
+/* SOFT FULL-WIDTH GREEN HALO
+   The marquee is clipped inside .ticker-window, not around the whole bar.
+   Light extends evenly across the full width, gently above and below. */
 .ticker {
   position: relative;
   overflow: visible;
   isolation: isolate;
   z-index: 12;
   width: 100%;
-  background: linear-gradient(180deg,#c7ff8b 0%,#baff77 35%,#baff77 65%,#b0ff70 100%);
-  border-top: 1px solid rgba(242,255,201,.82);
-  border-bottom: 1px solid rgba(220,255,170,.82);
+  background: #baff77;
+  border-top: 1px solid rgba(220,255,182,.55);
+  border-bottom: 1px solid rgba(193,244,144,.48);
   box-shadow:
-    0 -19px 54px rgba(186,255,119,.5),
-    0 21px 62px rgba(186,255,119,.47),
-    0 -4px 14px rgba(209,255,156,.55),
-    0 4px 16px rgba(209,255,156,.56),
-    inset 0 5px 18px rgba(255,255,255,.28),
-    inset 0 -4px 15px rgba(114,212,80,.18);
+    0 -8px 24px rgba(186,255,119,.10),
+    0 8px 26px rgba(186,255,119,.12),
+    inset 0 2px 8px rgba(255,255,255,.08);
 }
 .ticker::before {
   content:"";
   position:absolute;
   left:0;
   right:0;
-  top:-89px;
-  height:90px;
+  top:-55px;
+  height:56px;
   pointer-events:none;
   z-index:0;
   animation:none;
   background:linear-gradient(to top,
-    rgba(186,255,119,.56) 0%,
-    rgba(186,255,119,.46) 18%,
-    rgba(186,255,119,.3) 40%,
-    rgba(186,255,119,.13) 70%,
+    rgba(186,255,119,.16) 0%,
+    rgba(186,255,119,.10) 24%,
+    rgba(186,255,119,.045) 62%,
     rgba(186,255,119,0) 100%);
 }
 .ticker::after {
@@ -380,15 +375,14 @@ main, .site-footer { position: relative; z-index: 1; }
   position:absolute;
   left:0;
   right:0;
-  bottom:-100px;
-  height:101px;
+  bottom:-58px;
+  height:59px;
   pointer-events:none;
   z-index:0;
   background:linear-gradient(to bottom,
-    rgba(186,255,119,.57) 0%,
-    rgba(186,255,119,.46) 19%,
-    rgba(186,255,119,.29) 43%,
-    rgba(186,255,119,.12) 72%,
+    rgba(186,255,119,.17) 0%,
+    rgba(186,255,119,.10) 24%,
+    rgba(186,255,119,.045) 62%,
     rgba(186,255,119,0) 100%);
 }
 .ticker-window {
@@ -442,8 +436,8 @@ main, .site-footer { position: relative; z-index: 1; }
 @media(max-width:760px) {
   .site-header .official-wordmark {width:128px;height:56px;padding:3px 6px;border-radius:9px;}
   .footer-wordmark.official-wordmark {width:200px;height:94px;}
-  .ticker::before {top:-70px;height:71px;}
-  .ticker::after {bottom:-77px;height:78px;}
+  .ticker::before {top:-40px;height:41px;}
+  .ticker::after {bottom:-43px;height:44px;}
 }
 @media(max-width:420px) {
   .site-header .official-wordmark {width:117px;height:51px;padding:3px 5px;}
