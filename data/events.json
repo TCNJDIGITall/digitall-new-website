@@ -9,7 +9,8 @@
       "title": "Halloween De-stress/pumpkin carving",
       "description": "Event details are being finalized.",
       "status": "Tentative",
-      "location": "STEM 102 (planned)"
+      "location": "STEM 102 (planned)",
+      "flyerUrl": null
     },
     {
       "date": "2026-11-04",
@@ -17,7 +18,8 @@
       "title": "Guess the AI Image",
       "description": "Check Instagram for any updates or changes.",
       "status": "Planned",
-      "location": "STEM 102 (planned)"
+      "location": "STEM 102 (planned)",
+      "flyerUrl": null
     },
     {
       "date": "2026-11-11",
@@ -25,7 +27,8 @@
       "title": "Tech Bingo",
       "description": "Check Instagram for any updates or changes.",
       "status": "Planned",
-      "location": "Location TBA"
+      "location": "Location TBA",
+      "flyerUrl": null
     },
     {
       "date": "2026-11-18",
@@ -33,7 +36,9 @@
       "title": "Typing Competition",
       "description": "Check Instagram for any updates or changes.",
       "status": "Planned",
-      "location": "STEM 102 (planned)"
+      "location": "STEM 102 (planned)",
+      "flyerUrl": null
     }
-  ]
+  ],
+  "notes": "Upcoming event details are updated manually from the DIGIT.ALL Drive schedule. Set flyerUrl to a publicly accessible verified Drive URL or a local assets/flyers/*.pdf/png/jpg/webp path."
 }
