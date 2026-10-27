@@ -8,12 +8,12 @@
  * Do not use photos of past officers for current names.
  */
 window.DIGITALL_DATA = {
+  // Fall 2026 fallback. The latest event data is loaded from data/events.json.
   events: [
-    { date: "2026-10-28", category: "Community", title: "Halloween De-stress", description: "A Halloween-themed break from the semester. Activity details are being finalized.", status: "Tentative", location: "STEM 102 (planned)" },
-    { date: "2026-11-04", category: "Creative", title: "Guess the AI Image", description: "Put your eye for detail to the test in a lighthearted challenge.", status: "Planned", location: "STEM 102 (planned)" },
-    { date: "2026-11-11", category: "Community", title: "Tech Bingo", description: "A familiar game with a tech-inspired twist. Event details are being worked out.", status: "Tentative", location: "Location TBA" },
-    { date: "2026-11-18", category: "Challenge", title: "Typing Competition", description: "How fast can your fingers fly? Come hang out and give it a shot.", status: "Planned", location: "STEM 102 (planned)" },
-    { date: "2026-12-02", category: "Community", title: "Celebration of Computing", description: "Wrap up the semester by celebrating creativity and community in tech.", status: "Planned", location: "Location TBA" }
+    { date: "2026-10-28", category: "Community", title: "Halloween De-stress/pumpkin carving", description: "Event details are being finalized.", status: "Tentative", location: "STEM 102 (planned)" },
+    { date: "2026-11-04", category: "Tech", title: "Guess the AI Image", description: "Check Instagram for updates or changes.", status: "Planned", location: "STEM 102 (planned)" },
+    { date: "2026-11-11", category: "Challenge", title: "Tech Bingo", description: "Check Instagram for updates or changes.", status: "Planned", location: "Location TBA" },
+    { date: "2026-11-18", category: "Challenge", title: "Typing Competition", description: "Check Instagram for updates or changes.", status: "Planned", location: "STEM 102 (planned)" }
   ],
   leadership: [
     { name: "Gonzalo Chavez Ramos", role: "President" },
