@@ -46,3 +46,15 @@ Keep the repository under `TCNJDIGITall`, not a graduating student's account. In
 - Webmaster name from club webmaster; confirm the final roster before publishing.
 
 No npm, frameworks, build process, paid services, or API keys required. Google Fonts are optional: the design uses local system font fallbacks if unavailable.
+## Current E-Board photos
+
+The site currently shows large portrait cards for all 2026–27 officers, with their names and roles. The old website has headshots of **previous** E-Board members, so those photos have deliberately not been mislabeled as the current officers.
+
+To add official current headshots without editing page layout:
+
+1. Collect each member's photo with their approval.
+2. Upload a JPG, PNG, or WebP under `assets/eboard/` in this new repository.
+3. In `js/site-data.js`, add `photo: "assets/eboard/name.jpg"` to that member's data object.
+4. Commit and let GitHub Pages deploy. Failed images gracefully revert to an initials card.
+
+The refreshed site increases small text sizes, adds hover and scroll animations, and respects `prefers-reduced-motion`.
