@@ -1,0 +1,39 @@
+{
+  "source": "2026 Fall Event Schedule — DIGIT.all Drive",
+  "source_url": "",
+  "synced_at": null,
+  "events": [
+    {
+      "date": "2026-10-28",
+      "category": "Community",
+      "title": "Halloween De-stress/pumpkin carving",
+      "description": "Event details are being finalized.",
+      "status": "Tentative",
+      "location": "STEM 102 (planned)"
+    },
+    {
+      "date": "2026-11-04",
+      "category": "Tech",
+      "title": "Guess the AI Image",
+      "description": "Check Instagram for any updates or changes.",
+      "status": "Planned",
+      "location": "STEM 102 (planned)"
+    },
+    {
+      "date": "2026-11-11",
+      "category": "Challenge",
+      "title": "Tech Bingo",
+      "description": "Check Instagram for any updates or changes.",
+      "status": "Planned",
+      "location": "Location TBA"
+    },
+    {
+      "date": "2026-11-18",
+      "category": "Challenge",
+      "title": "Typing Competition",
+      "description": "Check Instagram for any updates or changes.",
+      "status": "Planned",
+      "location": "STEM 102 (planned)"
+    }
+  ]
+}
