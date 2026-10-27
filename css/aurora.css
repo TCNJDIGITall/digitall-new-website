@@ -259,7 +259,8 @@ main, .site-footer { position: relative; z-index: 1; }
 }
 
 /* Keep all widgets and controls clickable above decorative overlays. */
-.mailing-signup > *, .event-panel > *, .meeting-banner > *,.join-inner > * { position:relative; z-index:2; }
+.mailing-signup > *, .event-panel > *, .meeting-banner > *, .join-inner > :not(.join-burst) { position:relative; z-index:2; }
+.join-inner > .join-burst { z-index:1; }
 .event-row > .event-open,.team-card > .team-card-open { z-index:4; }
 .mailing-signup .mailing-form input { position:relative; z-index:3; }
 
