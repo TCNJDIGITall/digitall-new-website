@@ -75,8 +75,56 @@
 
     <section class="section section-team" id="team" aria-labelledby="team-title"><div class="container"><div class="section-heading reveal"><div><p class="section-label"><span class="section-number">03</span> THE PEOPLE BEHIND IT</p><h2 id="team-title">Meet your <em>2026–27 E-Board.</em></h2></div><p>Meet the students helping to make DIGIT.all welcoming, creative, and full of ideas.</p></div><div class="team-grid" id="team-grid"><p class="no-script-note">Our team for the 2026–27 academic year.</p></div><p class="portrait-note"><span aria-hidden="true">✳</span> We’re collecting the current E-Board’s portraits. Until then, the cards show initials instead of using outdated photos.</p><p class="team-note">2026–27 leadership listed by the TCNJ Computer Science Department. Webmaster listing supplied by the club. <a href="https://computerscience.tcnj.edu/students/student-organizations/" target="_blank" rel="noopener noreferrer">Official TCNJ listing ↗</a></p></div></section>
 
-    <section class="join-section" id="join" aria-labelledby="join-title"><div class="container"><div class="join-inner reveal"><div class="join-burst burst-a" aria-hidden="true">✳</div><div class="join-burst burst-b" aria-hidden="true">✴</div><p class="section-label dark-label"><span class="section-number">04</span> YOUR PEOPLE ARE HERE</p><h2 id="join-title">You don't have to fit<br><em>a mold</em> to fit in.</h2><p>Interested in tech? Just looking for a community? That's more than enough. No application, no prerequisites, no pressure.</p><div class="join-actions"><a class="btn btn-dark" href="mailto:tcnjdigit.allcs@gmail.com?subject=Joining%20DIGIT.all">Say hello by email <span aria-hidden="true">↗</span></a><a class="btn btn-outline-dark" href="https://www.instagram.com/tcnjdigit.all/" target="_blank" rel="noopener noreferrer">Find us on Instagram <span aria-hidden="true">↗</span></a></div><div class="join-small">ALL MAJORS WELCOME <span>✳</span> ALL SKILL LEVELS WELCOME <span>✳</span> ALL IDEAS WELCOME</div></div></div></section>
+    <section class="join-section" id="join" aria-labelledby="join-title"><div class="container"><div class="join-inner reveal"><div class="join-burst burst-a" aria-hidden="true">✳</div><div class="join-burst burst-b" aria-hidden="true">✴</div><p class="section-label dark-label"><span class="section-number">04</span> YOUR PEOPLE ARE HERE</p><h2 id="join-title">You don't have to fit<br><em>a mold</em> to fit in.</h2><p>Interested in tech? Just looking for a community? That's more than enough. No application, no prerequisites, no pressure.</p><div class="join-actions"><a class="btn btn-dark" href="#mailing-signup">Join our mailing list <span aria-hidden="true">↓</span></a><a class="btn btn-outline-dark" href="https://www.instagram.com/tcnjdigit.all/" target="_blank" rel="noopener noreferrer">Find us on Instagram <span aria-hidden="true">↗</span></a></div>
+  <section class="mailing-signup" id="mailing-signup" aria-labelledby="mailing-signup-title">
+    <div class="mailing-signup-heading">
+      <span class="mailing-label">GET THE CLUB UPDATES</span>
+      <h3 id="mailing-signup-title">Stay in the <em>loop.</em></h3>
+      <p>Enter your details to join DIGIT.all's existing TCNJ mailing list. The form opens Mailchimp in a new tab to complete signup or confirmation.</p>
+    </div>
+    <form class="mailing-form" action="https://tcnj.us10.list-manage.com/subscribe/post?u=bbccc42fc1a74775fee14e1a2&amp;id=5a216ce7a7" method="post" target="_blank" autocomplete="on">
+      <div class="mailing-fields">
+        <label>First name<input type="text" name="FNAME" autocomplete="given-name" required maxlength="80" placeholder="First name"></label>
+        <label>Last name<input type="text" name="LNAME" autocomplete="family-name" required maxlength="80" placeholder="Last name"></label>
+        <label class="mailing-wide">Email address<input type="email" name="EMAIL" autocomplete="email" required placeholder="you@tcnj.edu"></label>
+        <label>Major<input type="text" name="MAJOR" required maxlength="100" placeholder="Your major"></label>
+        <label>Graduation year<input type="number" name="YEAR" min="2025" max="2100" inputmode="numeric" required placeholder="2028"></label>
+      </div>
+      <div class="mailing-footer">
+        <p>Your information goes directly to the existing DIGIT.all Mailchimp list, not this website. Complete any confirmation that opens after submitting.</p>
+        <button class="btn btn-dark mailing-submit" type="submit">Subscribe <span aria-hidden="true">↗</span></button>
+      </div>
+    </form>
+  </section>
+<div class="join-small">ALL MAJORS WELCOME <span>✳</span> ALL SKILL LEVELS WELCOME <span>✳</span> ALL IDEAS WELCOME</div></div></div></section>
   </main>
+
+  <dialog class="club-dialog" id="team-dialog" aria-labelledby="team-dialog-title">
+    <div class="dialog-shell">
+      <button class="dialog-close" type="button" data-close-dialog aria-label="Close E-Board profile">×</button>
+      <span class="dialog-kicker">MEET YOUR E-BOARD</span>
+      <div class="profile-visual" id="team-dialog-portrait" aria-hidden="true">✳</div>
+      <p class="dialog-role" id="team-dialog-role"></p>
+      <h2 id="team-dialog-title"></h2>
+      <p id="team-dialog-description" class="dialog-description"></p>
+      <div class="dialog-footer"><a href="mailto:tcnjdigit.allcs@gmail.com?subject=DIGIT.all%20E-Board%20Question" class="dialog-contact">Contact the club <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </dialog>
+  <dialog class="club-dialog" id="event-dialog" aria-labelledby="event-dialog-title">
+    <div class="dialog-shell">
+      <button class="dialog-close" type="button" data-close-dialog aria-label="Close event details">×</button>
+      <span class="dialog-kicker">DIGIT.ALL EVENT DETAILS</span>
+      <p id="event-dialog-date" class="dialog-role"></p>
+      <h2 id="event-dialog-title"></h2>
+      <p class="event-modal-meta" id="event-dialog-location"></p>
+      <p id="event-dialog-description" class="dialog-description"></p>
+      <div class="event-modal-links">
+        <a id="event-dialog-flyer" class="event-flyer-link" href="#" target="_blank" rel="noopener noreferrer" hidden>View event flyer <span aria-hidden="true">↗</span></a>
+        <p id="event-dialog-no-flyer" class="no-flyer-note">No official flyer has been uploaded for this event yet.</p>
+        <a class="dialog-contact" href="https://www.instagram.com/tcnjdigit.all/" target="_blank" rel="noopener noreferrer">Check latest announcements <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </dialog>
   <footer class="site-footer"><div class="container"><div class="footer-top"><div><a class="wordmark footer-wordmark" href="#top"><span class="wordmark-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>DIGIT<span class="wordmark-dot">.</span>all</span></a><p>A more inclusive future in tech<br>starts with all of us.</p></div><div class="footer-links"><div><span>EXPLORE</span><a href="#about">About</a><a href="#events">Events</a><a href="#team">Our team</a></div><div><span>CONNECT</span><a href="https://www.instagram.com/tcnjdigit.all/" target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href="mailto:tcnjdigit.allcs@gmail.com">Email us ↗</a><a href="https://computerscience.tcnj.edu/" target="_blank" rel="noopener noreferrer">TCNJ Computer Science ↗</a></div></div></div><div class="footer-bottom"><span>© <span id="footer-year">2026</span> DIGIT.all · The College of New Jersey</span><a href="#top">BACK TO TOP ↑</a><span>Made for everyone. ✳</span></div></div></footer>
 </body>
 </html>
