@@ -39,7 +39,7 @@ body {
     linear-gradient(rgba(155,186,246,.055) 1px,transparent 1px);
   background-size: 56px 56px,112px 112px,112px 112px;
   mask-image: linear-gradient(to bottom,transparent 0%,#000 20%,#000 78%,transparent 100%);
-  transform: translate3d(0,calc(var(--ambient-scroll) * -.11),0);
+  transform: translate3d(0,var(--ambient-grid-shift,0px),0);
 }
 .ambient-orb {
   display: block;
@@ -63,7 +63,7 @@ body {
   left: -18vmax;
   width: min(86vw,78vmax);
   height: min(86vw,78vmax);
-  transform: translate3d(0,calc(var(--ambient-scroll) * -.32),0);
+  transform: translate3d(0,var(--ambient-one-shift,0px),0);
 }
 .ambient-orb--one::before {
   background: radial-gradient(circle,rgba(104,120,255,.43) 0%,rgba(91,100,223,.24) 42%,transparent 71%);
@@ -73,7 +73,7 @@ body {
   right: -24vmax;
   width: min(85vw,83vmax);
   height: min(85vw,83vmax);
-  transform: translate3d(0,calc(var(--ambient-scroll) * .27),0);
+  transform: translate3d(0,var(--ambient-two-shift,0px),0);
 }
 .ambient-orb--two::before {
   background: radial-gradient(circle,rgba(66,213,232,.38) 0%,rgba(45,175,205,.21) 43%,transparent 72%);
@@ -85,7 +85,7 @@ body {
   left: 3vw;
   width: min(84vw,74vmax);
   height: min(84vw,74vmax);
-  transform: translate3d(0,calc(var(--ambient-scroll) * -.2),0);
+  transform: translate3d(0,var(--ambient-three-shift,0px),0);
 }
 .ambient-orb--three::before {
   background: radial-gradient(circle,rgba(170,114,255,.41) 0%,rgba(151,92,218,.23) 44%,transparent 73%);
@@ -98,7 +98,7 @@ body {
   width: min(60vw,44vmax);
   height: min(60vw,44vmax);
   opacity: .24;
-  transform: translate3d(0,calc(var(--ambient-scroll) * .12),0);
+  transform: translate3d(0,var(--ambient-four-shift,0px),0);
 }
 .ambient-orb--four::before {
   background: radial-gradient(circle,rgba(173,255,164,.31),rgba(117,246,187,.1) 46%,transparent 73%);
