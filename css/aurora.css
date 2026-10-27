@@ -287,3 +287,51 @@ main, .site-footer { position: relative; z-index: 1; }
   .ambient-pointer-light{display:none!important;}
   :where(.feature-card,.team-card,.event-row,.mailing-signup,.meeting-banner,.event-panel,.join-inner)::after {transition:none!important;}
 }
+
+
+/* Full-width neon-green glow on the values strip directly below the hero. */
+.ticker {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    #baff77 0%,
+    #d3ffa0 25%,
+    #baff77 52%,
+    #c7ff90 76%,
+    #baff77 100%
+  );
+  border-top: 1px solid rgba(243,255,211,.65);
+  border-bottom: 1px solid rgba(193,255,158,.55);
+  box-shadow:
+    0 -10px 38px rgba(186,255,119,.32),
+    0 13px 48px rgba(186,255,119,.38),
+    0 0 78px rgba(186,255,119,.22),
+    inset 0 5px 20px rgba(255,255,255,.34),
+    inset 0 -8px 22px rgba(104,217,83,.22);
+}
+.ticker::before {
+  content:"";
+  pointer-events:none;
+  position:absolute;
+  inset:0;
+  z-index:0;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.30),transparent 42%,rgba(125,246,92,.22)),
+    linear-gradient(90deg,rgba(224,255,161,.12),rgba(255,255,255,.23) 50%,rgba(224,255,161,.12));
+  animation: tickerFullGlow 6s ease-in-out infinite alternate;
+}
+.ticker-track {
+  position: relative;
+  z-index: 1;
+  color: #182b20;
+}
+@keyframes tickerFullGlow {
+  0% {opacity:.68;}
+  100% {opacity:1;}
+}
+@media(prefers-reduced-motion:reduce) {
+  .ticker::before {animation:none!important;opacity:.9;}
+}
