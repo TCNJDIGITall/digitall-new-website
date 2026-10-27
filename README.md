@@ -8,7 +8,7 @@ Live preview: https://tcnjdigitall.github.io/digitall-new-website/
 
 ## Easy updates: one request covers events AND flyers
 
-The source of truth for event cards is **`data/events.json`** (with a fallback in `js/site-data.js`). You can ask ChatGPT, with the club GitHub and school Drive connected:
+The source of truth for event cards is **`data/events.json`** (with a fallback in `js/site-data.js`). The club webmaster can use an authorized GitHub and school Drive connection to make a single update:
 
 > Update the DIGIT.all website for the latest events in the DIGIT.ALL Drive schedule. Check the club's Flyers folder for matching promotional images or PDFs, and update the event names, dates, descriptions, room numbers and flyer links together. Commit everything directly to `TCNJDIGITall/digitall-new-website`, without editing the old repository.
 
