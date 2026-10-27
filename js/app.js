@@ -21,6 +21,76 @@
     window.addEventListener('resize', () => { if (window.innerWidth > 760) closeMenu(); });
   }
 
+
+  // Native HTML dialogs handle focus and Escape. Never invent officer bios or flyer URLs.
+  const teamDialog = document.getElementById('team-dialog');
+  const eventDialog = document.getElementById('event-dialog');
+  let dialogReturnFocus = null;
+  function showDialog(dialog) {
+    if (!dialog || typeof dialog.showModal !== 'function') return;
+    dialogReturnFocus = document.activeElement;
+    dialog.showModal();
+  }
+  [teamDialog, eventDialog].forEach(dialog => {
+    if (!dialog) return;
+    dialog.querySelectorAll('[data-close-dialog]').forEach(btn => btn.addEventListener('click', () => dialog.close()));
+    dialog.addEventListener('click', event => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      if (dialogReturnFocus && document.contains(dialogReturnFocus)) dialogReturnFocus.focus({ preventScroll: true });
+    });
+  });
+  const shortDate = date => {
+    const dt = new Date(date + 'T12:00:00');
+    return Number.isNaN(dt.getTime()) ? 'Date to be announced' :
+      dt.toLocaleDateString('en-US', { timeZone:'America/New_York', weekday:'long', month:'long', day:'numeric', year:'numeric' });
+  };
+  function flyerHref(value) {
+    if (typeof value !== 'string' || !value.trim()) return null;
+    // Only verified Google Drive links or files in this site's public flyers folder.
+    if (/^assets\/flyers\/[a-zA-Z0-9_.-]+\.(pdf|png|jpe?g|webp)$/i.test(value)) return value;
+    if (/^https:\/\/drive\.google\.com\/file\/d\/[a-zA-Z0-9_-]+\/view(?:\?[^#]*)?$/i.test(value)) return value;
+    return null;
+  }
+  function showEvent(event) {
+    if (!eventDialog) return;
+    eventDialog.querySelector('#event-dialog-title').textContent = event.title || 'Club event';
+    eventDialog.querySelector('#event-dialog-date').textContent =
+      shortDate(event.date) + '  ·  ' + (event.status || 'Planned');
+    eventDialog.querySelector('#event-dialog-location').textContent = 'Location: ' + (event.location || 'To be announced');
+    eventDialog.querySelector('#event-dialog-description').textContent =
+      event.description || 'Look for details on our Instagram.';
+    const flyer = eventDialog.querySelector('#event-dialog-flyer');
+    const missing = eventDialog.querySelector('#event-dialog-no-flyer');
+    const url = flyerHref(event.flyerUrl);
+    flyer.hidden = !url;
+    missing.hidden = !!url;
+    if (url) flyer.href = url;
+    else flyer.removeAttribute('href');
+    showDialog(eventDialog);
+  }
+  function showProfile(person, accent) {
+    if (!teamDialog) return;
+    teamDialog.querySelector('#team-dialog-title').textContent = person.name;
+    teamDialog.querySelector('#team-dialog-role').textContent = person.role;
+    teamDialog.querySelector('#team-dialog-description').textContent =
+      person.bio || 'Part of the DIGIT.all E-Board. Check back for a personal introduction.';
+    const visual = teamDialog.querySelector('#team-dialog-portrait');
+    visual.replaceChildren();
+    visual.style.setProperty('--accent', accent || '#baff77');
+    const portrait = typeof person.photo === 'string' &&
+      /^assets\/eboard\/[a-z\d._-]+\.(?:png|jpg|jpeg|webp)$/i.test(person.photo) ? person.photo : null;
+    if (portrait) {
+      const img = document.createElement('img');
+      img.src = portrait;
+      img.alt = '';
+      img.addEventListener('error', () => { visual.textContent = person.name.split(/\s+/).map(x => x[0]).slice(0,2).join(''); }, { once:true });
+      visual.append(img);
+    } else visual.textContent = person.name.split(/\s+/).map(x => x[0]).slice(0,2).join('');
+    showDialog(teamDialog);
+  }
+
   const eventList = document.getElementById('event-list');
   function renderEvents(events) {
     if (!eventList || !Array.isArray(events)) return;
@@ -59,7 +129,16 @@
       const location = document.createElement('span'); location.textContent = event.location || 'Details TBA';
       const arrow = document.createElement('span'); arrow.className = 'event-end-icon'; arrow.textContent = '↗'; arrow.setAttribute('aria-hidden', 'true');
       end.append(location, arrow);
-      row.append(dateBox, textBox, end);
+      const hint = document.createElement('span');
+      hint.className = 'event-hint';
+      hint.textContent = event.flyerUrl ? 'VIEW DETAILS & FLYER' : 'VIEW EVENT DETAILS';
+      end.prepend(hint);
+      const trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'event-open';
+      trigger.setAttribute('aria-label', 'View details for ' + (event.title || 'event') + ' on ' + shortDate(event.date));
+      trigger.addEventListener('click', () => showEvent(event));
+      row.append(dateBox, textBox, end, trigger);
       eventList.append(row);
     });
 
@@ -148,7 +227,12 @@
       const name = document.createElement('h3');
       name.textContent = person.name;
       info.append(top, name);
-      card.append(portrait, info);
+      const trigger = document.createElement('button');
+      trigger.type = 'button';
+      trigger.className = 'team-card-open';
+      trigger.setAttribute('aria-label', 'Read about ' + person.name + ', ' + person.role);
+      trigger.addEventListener('click', () => showProfile(person, accents[index % accents.length]));
+      card.append(portrait, info, trigger);
       teamGrid.append(card);
     });
   }
