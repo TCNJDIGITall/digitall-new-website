@@ -1,60 +1,71 @@
-# DIGIT.all — new website (2026)
+# DIGIT.all — new website
 
-A brand-new, responsive, static website for DIGIT.all, Diversity & Inclusion Group In Tech for All, at The College of New Jersey.
+Official website project for **DIGIT.all (Diversity & Inclusion Group In Tech for All)** at The College of New Jersey.
 
-**This project is independent of the current `TCNJDIGITall.github.io` repository.** Do not delete or replace the old site during development.
+Live preview: https://tcnjdigitall.github.io/digitall-new-website/
 
-## Preview locally
+**Independent of the original `TCNJDIGITall/TCNJDIGITall.github.io` repository.** Leave the original site alone until the E-Board is ready to replace it.
 
-You can open `index.html` in a browser. For a more reliable local preview, run this in the project folder:
+## Easy updates: one request covers events AND flyers
 
-```bash
-python -m http.server 8000
+The source of truth for event cards is **`data/events.json`** (with a fallback in `js/site-data.js`). You can ask ChatGPT, with the club GitHub and school Drive connected:
+
+> Update the DIGIT.all website for the latest events in the DIGIT.ALL Drive schedule. Check the club's Flyers folder for matching promotional images or PDFs, and update the event names, dates, descriptions, room numbers and flyer links together. Commit everything directly to `TCNJDIGITall/digitall-new-website`, without editing the old repository.
+
+The webmaster only needs to **make one request** after the schedule or flyers change. This is a **manual update, not unattended synchronization**.
+
+Each record in `data/events.json` can contain:
+
+```json
+{
+  "date": "2026-11-04",
+  "category": "Tech",
+  "title": "Guess the AI Image",
+  "description": "Check Instagram for announcements.",
+  "status": "Planned",
+  "location": "STEM 102 (planned)",
+  "flyerUrl": null
+}
 ```
 
-Then visit http://localhost:8000.
+- When a flyer exists and is authorized for public use, upload it to `assets/flyers/` (PDF/PNG/JPG/WebP) and set `flyerUrl` to its relative path, e.g. `assets/flyers/guess-the-ai-image.png`. Alternatively link a **publicly accessible** Google Drive file's `/view` URL.
+- **Do not expose private Google Drive files or private meeting notes.** The club's shared flyers are currently access-controlled; an ordinary Drive link can fail for site visitors unless it is shared for public viewing. Copy only approved event flyers to this *public* repository.
+- Event cards show an interactive detail dialog. If `flyerUrl` is missing, the dialog honestly states no official flyer is available rather than pretending to open one.
+- Past dated events are hidden automatically, but the JSON retains history. Blank/canceled meetings should not be presented as upcoming events.
+- Events are planning information until the E-Board confirms them. Check DIGIT.all's Instagram for any last-minute changes.
 
-## Edit the website
+## Mailing list
 
-- `index.html`: all main page sections, mission copy, navigation, links, and layout.
-- `css/styles.css`: colors, fonts, animations, mobile layouts.
-- `js/site-data.js`: **events and leadership names**. This is what future webmasters should edit each semester.
-- `js/app.js`: renders the event and leadership lists and handles mobile navigation.
-- `assets/favicon.svg`: simplified site icon.
+The `Join our mailing list` action scrolls to a proper subscription form on the website. It submits directly to the **existing TCNJ Mailchimp endpoint recovered from the original club website**, using the original `FNAME`, `LNAME`, `EMAIL`, `MAJOR`, and `YEAR` fields. A separate tab displays Mailchimp's server response/confirmation; the website does **not** claim the subscription succeeded by itself.
 
-When updating `js/site-data.js`, keep each event inside the `events` array and each officer inside `leadership`. Date format is `YYYY-MM-DD`. Set `status` to `Planned`, `Tentative`, or another clear, accurate status. Check that events are actually approved and announced before describing them as confirmed.
+If this legacy Mailchimp list is no longer managed by the club or has been deactivated, ask the current E-Board to supply the replacement form URL. Do **not** collect submitted email addresses in GitHub or in this static site.
 
-## Publish safely under the club's GitHub account
+## E-Board profiles and photos
 
-1. Sign into GitHub as `TCNJDIGITall`.
-2. Create a **new public repository**, suggested name: `digitall-new-website`.
-3. Upload these files and folders, preserving the directory structure. Or connect the new repository to ChatGPT's GitHub integration so edits can be committed directly.
-4. In the **new** repository, select Settings → Pages → Deploy from a branch → `main` → `/(root)` → Save. GitHub will provide a preview site, typically on a URL like `https://tcnjdigitall.github.io/digitall-new-website/`.
-5. Review everything on desktop and mobile before deciding whether to replace the existing live website. **Do not change the old repo or its GitHub Pages settings during review.**
+Current leadership is listed in `js/site-data.js`. Every E-Board portrait card can be clicked to open a short profile. The current descriptions explain each **role**; they are not invented personal biographies.
 
-## Ownership and next-year handoff
+To change a role description, edit the person's `bio` field. For actual approved headshots, upload JPG/PNG/WebP to `assets/eboard/` and add `photo: "assets/eboard/example-name.jpg"` to that person's entry. The cards fall back to initials when a photo is not available. Do not reuse pictures of previous-year officers.
 
-Keep the repository under `TCNJDIGITall`, not a graduating student's account. Incoming webmaster should have appropriate GitHub repository access, verify officer names and event dates, update `js/site-data.js`, and publish changes by committing. Maintain recovery methods on the club-controlled account; don't put passwords, tokens, or private member information in the repo.
+## Project structure
 
-## Content notes / sources
+- `index.html`: site structure, mailing-list form, accessible E-Board/event dialogs.
+- `css/styles.css`: responsive design, text size, contrast, transitions, reduced-motion support.
+- `js/site-data.js`: officer names, roles, role descriptions and photo paths; fallback event data.
+- `js/app.js`: renders events/E-Board, opens dialogs, reads data, mobile navigation.
+- `data/events.json`: main schedule and matching event-flyer links.
+- `assets/flyers/`: future public event flyers.
+- `assets/eboard/`: current officer headshots (if provided).
+- `scripts/sync_drive_schedule.py`: **unused** experimental script from the earlier automatic-sync discussion. No scheduled workflow is enabled.
 
-- Mission and 2026–27 board names: https://computerscience.tcnj.edu/students/student-organizations/
-- Meeting time and location: https://science.tcnj.edu/school-information/student-clubs-organizations/ (reconfirm for the current term).
-- Planned Fall 2026 events: internal DIGIT.ALL Drive, `2026 Fall Event Schedule` and `2026 Fall Event Schedule.docx`. Several entries differ between drafts. **Events are labeled planned/tentative until verified.**
-- Instagram: https://www.instagram.com/tcnjdigit.all/
-- Contact email: `tcnjdigit.allcs@gmail.com`, supplied by club webmaster.
-- Webmaster name from club webmaster; confirm the final roster before publishing.
+The website is static and hosted on GitHub Pages from the `main` branch. No paid framework or hosting service is necessary.
 
-No npm, frameworks, build process, paid services, or API keys required. Google Fonts are optional: the design uses local system font fallbacks if unavailable.
-## Current E-Board photos
+## Next-year handoff
 
-The site currently shows large portrait cards for all 2026–27 officers, with their names and roles. The old website has headshots of **previous** E-Board members, so those photos have deliberately not been mislabeled as the current officers.
+The club-owned GitHub account must retain control of the repository. Give incoming webmasters appropriate repository access; keep credentials private. Review club officer names, mailing-list service, event schedule, social links and photos at the start of each school year.
 
-To add official current headshots without editing page layout:
+## Source references
 
-1. Collect each member's photo with their approval.
-2. Upload a JPG, PNG, or WebP under `assets/eboard/` in this new repository.
-3. In `js/site-data.js`, add `photo: "assets/eboard/name.jpg"` to that member's data object.
-4. Commit and let GitHub Pages deploy. Failed images gracefully revert to an initials card.
-
-The refreshed site increases small text sizes, adds hover and scroll animations, and respects `prefers-reduced-motion`.
+- The College of New Jersey club listing: https://computerscience.tcnj.edu/students/student-organizations/
+- DIGIT.all Instagram: https://www.instagram.com/tcnjdigit.all/
+- Club contact: tcnjdigit.allcs@gmail.com
+- Events: club-maintained DIGIT.ALL Drive schedule and promotional flyers.
