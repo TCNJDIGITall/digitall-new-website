@@ -185,8 +185,19 @@
   const teamGrid = document.getElementById('team-grid');
   if (teamGrid && Array.isArray(data.leadership)) {
     teamGrid.replaceChildren();
+    // Explicit role order, so the Webmaster cannot appear as 07/07
+    // even when an older roster data file has been cached by the browser.
+    const boardRoleOrder = [
+      'President', 'Vice President', 'Treasurer', 'Secretary',
+      'Outreach Chair', 'Webmaster', 'Social Media Manager'
+    ];
+    const roleRank = role => {
+      const index = boardRoleOrder.indexOf(role);
+      return index === -1 ? boardRoleOrder.length : index;
+    };
+    const orderedLeadership = [...data.leadership].sort((a,b) => roleRank(a.role) - roleRank(b.role));
     const accents = ['#baff77', '#c7afff', '#7ccbea', '#f6c2b0', '#a9d9ce', '#dfbafb', '#baff77'];
-    data.leadership.forEach((person, index) => {
+    orderedLeadership.forEach((person, index) => {
       const card = document.createElement('article');
       card.className = 'team-card reveal';
       card.style.setProperty('--accent', accents[index % accents.length]);
@@ -222,7 +233,7 @@
       role.textContent = person.role;
       const number = document.createElement('span');
       number.className = 'team-number';
-      number.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(data.leadership.length).padStart(2, '0');
+      number.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(orderedLeadership.length).padStart(2, '0');
       top.append(role, number);
       const name = document.createElement('h3');
       name.textContent = person.name;
