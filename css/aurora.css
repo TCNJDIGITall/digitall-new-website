@@ -417,12 +417,6 @@ main, .site-footer { position: relative; z-index: 1; }
   transition: border-color .2s, background .2s;
 }
 .dialog-contact-copy:hover { background: #405b80; border-color: #baff77; }
-.dialog-contact-actions .dialog-contact-secondary {
-  font-size: 14px;
-  padding: 7px 0;
-  color: #d4e9ff;
-  border-bottom-color: #89b8da;
-}
 .dialog-contact-actions :is(a,button):focus-visible {
   outline: 3px solid #baff77;
   outline-offset: 3px;
@@ -438,7 +432,6 @@ main, .site-footer { position: relative; z-index: 1; }
   .dialog-contact-actions { align-items: stretch; flex-direction: column; }
   .dialog-contact-actions .dialog-contact-primary,
   .dialog-contact-actions .dialog-contact-copy { justify-content: center; text-align: center; }
-  .dialog-contact-actions .dialog-contact-secondary { align-self: center; }
 }
 @media (prefers-reduced-motion: reduce) {
   .dialog-contact-copy { transition: none; }
