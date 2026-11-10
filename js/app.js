@@ -185,11 +185,11 @@
   const teamGrid = document.getElementById('team-grid');
   if (teamGrid && Array.isArray(data.leadership)) {
     teamGrid.replaceChildren();
-    // Explicit role order, so the Webmaster cannot appear as 07/07
-    // even when an older roster data file has been cached by the browser.
+    // Explicit role order keeps the website in the E-Board's chosen display order,
+    // even if a browser has cached an earlier roster data file.
     const boardRoleOrder = [
       'President', 'Vice President', 'Treasurer', 'Secretary',
-      'Outreach Chair', 'Webmaster', 'Social Media Manager'
+      'Outreach Chair', 'Social Media Manager', 'Webmaster'
     ];
     const roleRank = role => {
       const index = boardRoleOrder.indexOf(role);
