@@ -123,7 +123,15 @@
       <p class="dialog-role" id="team-dialog-role"></p>
       <h2 id="team-dialog-title"></h2>
       <p id="team-dialog-description" class="dialog-description"></p>
-      <div class="dialog-footer"><a href="mailto:tcnjdigit.allcs@gmail.com?subject=DIGIT.all%20E-Board%20Question" class="dialog-contact">Contact the club <span aria-hidden="true">↗</span></a></div>
+      <div class="dialog-footer">
+        <p class="dialog-contact-note">Questions for the E-Board? Contact the club at <strong>tcnjdigit.allcs@gmail.com</strong>.</p>
+        <div class="dialog-contact-actions">
+          <a id="team-email-gmail" class="dialog-contact dialog-contact-primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=tcnjdigit.allcs%40gmail.com&amp;su=DIGIT.all%20E-Board%20Question" target="_blank" rel="noopener noreferrer">Email in Gmail <span aria-hidden="true">↗</span></a>
+          <button id="team-email-copy" class="dialog-contact-copy" type="button">Copy email address</button>
+          <a id="team-email-app" class="dialog-contact dialog-contact-secondary" href="mailto:tcnjdigit.allcs@gmail.com?subject=DIGIT.all%20E-Board%20Question">Use email app <span aria-hidden="true">↗</span></a>
+        </div>
+        <p id="team-email-feedback" class="dialog-contact-feedback" role="status" aria-live="polite"></p>
+      </div>
     </div>
   </dialog>
   <dialog class="club-dialog" id="event-dialog" aria-labelledby="event-dialog-title">
