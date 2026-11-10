@@ -79,14 +79,9 @@
     const clubEmail = 'tcnjdigit.allcs@gmail.com';
     const subject = 'DIGIT.all E-Board question: ' + person.role;
     const gmailCompose = teamDialog.querySelector('#team-email-gmail');
-    const outlookCompose = teamDialog.querySelector('#team-email-outlook');
     if (gmailCompose) {
       gmailCompose.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' +
         encodeURIComponent(clubEmail) + '&su=' + encodeURIComponent(subject);
-    }
-    if (outlookCompose) {
-      outlookCompose.href = 'https://outlook.office.com/mail/deeplink/compose?to=' +
-        encodeURIComponent(clubEmail) + '&subject=' + encodeURIComponent(subject);
     }
     const copyFeedback = teamDialog.querySelector('#team-email-feedback');
     if (copyFeedback) copyFeedback.textContent = '';
