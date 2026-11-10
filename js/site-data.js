@@ -22,8 +22,8 @@ window.DIGITALL_DATA = {
     { name: "Arya Sekkappan", role: "Treasurer", bio: "The treasurer handles budgets and funding planning, helping the club make workshops, social events, and other activities possible." },
     { name: "Aidan Cimbrik", role: "Secretary", bio: "The secretary helps with meeting notes, club records, and communication so members and the E-Board stay organized." },
     { name: "Ryan Wildman", role: "Outreach Chair", bio: "The outreach chair helps connect DIGIT.all with students, campus groups, and opportunities to welcome new people into the community." },
-    { name: "Abishek Madesh", role: "Webmaster", bio: "The webmaster maintains and improves DIGIT.all’s website, making club events, contacts, and resources easier for students to find." }
-    { name: "Nivetha Sree Sekar", role: "Social Media Manager", bio: "The social media manager shares club updates and event news, helping students discover what is happening at DIGIT.all." },
+    { name: "Abishek Madesh", role: "Webmaster", bio: "The webmaster maintains and improves DIGIT.all’s website, making club events, contacts, and resources easier for students to find." },
+    { name: "Nivetha Sree Sekar", role: "Social Media Manager", bio: "The social media manager shares club updates and event news, helping students discover what is happening at DIGIT.all." }
   ]
 };
 
