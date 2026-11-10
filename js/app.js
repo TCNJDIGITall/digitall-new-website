@@ -76,6 +76,19 @@
     teamDialog.querySelector('#team-dialog-role').textContent = person.role;
     teamDialog.querySelector('#team-dialog-description').textContent =
       person.bio || 'Part of the DIGIT.all E-Board. Check back for a personal introduction.';
+    const clubEmail = 'tcnjdigit.allcs@gmail.com';
+    const subject = 'DIGIT.all E-Board question: ' + person.role;
+    const gmailCompose = teamDialog.querySelector('#team-email-gmail');
+    const mailApp = teamDialog.querySelector('#team-email-app');
+    if (gmailCompose) {
+      gmailCompose.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' +
+        encodeURIComponent(clubEmail) + '&su=' + encodeURIComponent(subject);
+    }
+    if (mailApp) mailApp.href = 'mailto:' + clubEmail + '?subject=' + encodeURIComponent(subject);
+    const copyFeedback = teamDialog.querySelector('#team-email-feedback');
+    if (copyFeedback) copyFeedback.textContent = '';
+    const copyButton = teamDialog.querySelector('#team-email-copy');
+    if (copyButton) copyButton.textContent = 'Copy email address';
     const visual = teamDialog.querySelector('#team-dialog-portrait');
     visual.replaceChildren();
     visual.style.setProperty('--accent', accent || '#baff77');
@@ -89,6 +102,44 @@
       visual.append(img);
     } else visual.textContent = person.name.split(/\s+/).map(x => x[0]).slice(0,2).join('');
     showDialog(teamDialog);
+  }
+
+  // A browser-based Gmail link works without a registered mailto handler.
+  // Copying the public club address offers a provider-independent fallback.
+  const copyEmailButton = teamDialog?.querySelector('#team-email-copy');
+  if (copyEmailButton) {
+    copyEmailButton.addEventListener('click', async () => {
+      const address = 'tcnjdigit.allcs@gmail.com';
+      const feedback = teamDialog.querySelector('#team-email-feedback');
+      let copied = false;
+      try {
+        if (navigator.clipboard?.writeText && window.isSecureContext) {
+          await navigator.clipboard.writeText(address);
+          copied = true;
+        } else {
+          const field = document.createElement('textarea');
+          field.value = address;
+          field.setAttribute('readonly', '');
+          field.style.position = 'fixed';
+          field.style.opacity = '0';
+          document.body.appendChild(field);
+          try {
+            field.select();
+            copied = document.execCommand('copy');
+          } finally {
+            field.remove();
+          }
+        }
+      } catch (error) {
+        copied = false;
+      }
+      if (feedback) {
+        feedback.textContent = copied
+          ? 'Email address copied. Paste it into any email service.'
+          : 'Could not copy automatically. Select the email address shown above.';
+      }
+      if (copied) copyEmailButton.textContent = 'Copied!';
+    });
   }
 
   const eventList = document.getElementById('event-list');
