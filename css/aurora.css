@@ -373,3 +373,73 @@ main, .site-footer { position: relative; z-index: 1; }
 
   .official-wordmark {transition:none!important;}
 }
+
+
+/* E-Board profile contact options: browser email + copy + local email app. */
+.dialog-contact-note {
+  margin: 0 0 18px;
+  color: #e3eafa;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.dialog-contact-note strong {
+  color: #d2fba3;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.dialog-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+}
+.dialog-contact-actions .dialog-contact-primary {
+  border: 1px solid transparent;
+  border-radius: 9px;
+  padding: 12px 16px;
+  background: #baff77;
+  color: #14251d;
+  font-size: 15px;
+  text-decoration: none;
+}
+.dialog-contact-actions .dialog-contact-primary:hover {
+  color: #14251d;
+  background: #d1ffa0;
+}
+.dialog-contact-copy {
+  padding: 12px 16px;
+  color: #eef6ff;
+  font: 700 14px/1.5 var(--font-heading);
+  background: #31496a;
+  border: 1px solid #87a6c4;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: border-color .2s, background .2s;
+}
+.dialog-contact-copy:hover { background: #405b80; border-color: #baff77; }
+.dialog-contact-actions .dialog-contact-secondary {
+  font-size: 14px;
+  padding: 7px 0;
+  color: #d4e9ff;
+  border-bottom-color: #89b8da;
+}
+.dialog-contact-actions :is(a,button):focus-visible {
+  outline: 3px solid #baff77;
+  outline-offset: 3px;
+}
+.dialog-contact-feedback {
+  margin: 12px 0 0;
+  min-height: 21px;
+  color: #d0f5c2;
+  font-size: 14px;
+  line-height: 1.5;
+}
+@media (max-width: 520px) {
+  .dialog-contact-actions { align-items: stretch; flex-direction: column; }
+  .dialog-contact-actions .dialog-contact-primary,
+  .dialog-contact-actions .dialog-contact-copy { justify-content: center; text-align: center; }
+  .dialog-contact-actions .dialog-contact-secondary { align-self: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dialog-contact-copy { transition: none; }
+}
